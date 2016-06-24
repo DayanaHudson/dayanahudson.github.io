@@ -1,1 +1,140 @@
-"Hello World" 
+<DOCTYPE html>
+	<style>
+		* {
+			margin: 0;
+		}
+		html, body{
+			height: 100%;
+			background-color: #fff;
+		}
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #333;
+		}
+
+		li {
+			float: left;
+			font-family: sans-serif;
+		}
+
+		li a {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+		}
+
+		/* Change the link color to #111 (black) on hover */
+		li a:hover {
+			background-color: #111;
+		}
+
+		li a:active {
+			background-color: #fff;
+			color: #333;
+		}
+
+		.wrapper{
+			min-height: 100%;
+			margin-bottom: -9em;
+			padding-bottom: -9em;
+		}
+		.push{
+			display: block;
+			height: 2em;
+			background-color: #333;
+		}
+		.footer{
+			display: block;
+			height: 7em;
+			font-family: sans-serif;
+			text-align: center;
+			background-color: #333;
+			color: white;
+		}
+
+		.gallery {
+			margin: auto;
+			overflow-y: auto;
+			overflow-x: hidden;
+			font-size: 0;
+			width: 90%;
+			height: 48vw;
+			scroll-snap-type: mandatory;
+			scroll-snap-points-y: repeat(100%);
+			scroll-snap-destination: 50% 50%;
+			scroll-snap-points-x: repeat(100%);
+			scroll-snap-type: mandatory;
+			scroll-snap-destination: 50% 50%;
+		}
+
+		img {
+			width: 100%;
+			scroll-snap-coordinate: 50% 50%;
+		}
+
+	</style>
+
+	<head>
+		<title>Dayana Hudson</title>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="#projects">Projects</a></li>
+				<li style="float:right"><a href="#contact">Contact</a></li>
+			</ul>
+			<div id="chart_div"></div>
+		</div>
+		<div class="push"></div>
+		<div class="footer">
+			<p>Dayana E. Hudson</p>
+			<p>dhudso22@gmu.edu</p>
+			</br>
+			<p style="font-size: 13; font-family: Lucida Console">linkedin  |  instagram  |  blog</p>
+		</div>
+	</body>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+	// Load the Visualization API and the corechart package.
+	google.charts.load('current', {'packages':['corechart']});
+	// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(initialize);
+	function initialize() {
+		var opts = {sendMethod: 'auto'};
+		// Replace the data source URL on next line with your data source URL.
+		var queryString = encodeURIComponent('SELECT A, N');
+		var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1vQUSDiWrQl175HIeQ2JUohkr1ntqYikRs_spADnlFjA/gviz/tq?sheet=2016&headers=1&range=A1:N16&tq=' + queryString);
+		// Send the query with a callback function.
+		query.send(handleQueryResponse);
+	}
+	function handleQueryResponse(response) {
+		// Called when the query response is returned.
+		if(response.isError()){
+			alert('Error in query: '+ response.getMessage());
+			return;
+		}
+		var data = response.getDataTable();
+		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+		chart.draw(data, {width: 700, height: 400, is3D: true, title:'Distribution of work for the Dream Project'});
+	}
+	</script>
+	<script>
+	@supports ( (scroll-snap-type: mandatory) or (-webkit-scroll-snap-type: mandatory) ) {
+    /* SCROLL SNAP or some specific rules */
+
+}
+
+@supports ( not ((scroll-snap-type: mandatory) or (-webkit-scroll-snap-type: mandatory)) ) {
+    /* rules to be applied when SCROLL SNAP is NOT supported */
+}
+	</script>
+
+</html>
